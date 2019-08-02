@@ -17,18 +17,19 @@ app.set('host', process.env.APP_HOST || 'localhost');
 
 app.use(express.static(constant.distDir));
 
-// app.use(cors());
-// app.use(helmet.contentSecurityPolicy({
-//     directives: {
-//         defaultSrc: ["'self'"],
-//         imgSrc: ["'self'"]
-//     }
-// }));
-// app.use(compression());
-// app.use(methodOverride());
-// app.use(bodyParser.json());
-// app.use(morgan('dev'));
-// app.use(express.static(constant.assetsDir));
+app.use(cors());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'"],
+        scriptSrc: ["'unsafe-eval'"]
+    }
+}));
+app.use(compression());
+app.use(methodOverride());
+app.use(bodyParser.json());
+app.use(morgan('dev'));
+app.use(express.static(constant.assetsDir));
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
 
