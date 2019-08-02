@@ -17,7 +17,7 @@ app.set('host', process.env.APP_HOST || 'localhost');
 
 app.use(express.static(constant.distDir));
 
-app.use(cors());
+// app.use(cors());
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"],
