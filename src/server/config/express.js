@@ -24,7 +24,7 @@ app.use(express.static(constant.distDir));
 //         imgSrc: ["'self'"]
 //     }
 // }));
-app.use(compression());
+// app.use(compression());
 app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(morgan('dev'));
