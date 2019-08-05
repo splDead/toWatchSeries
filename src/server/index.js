@@ -17,12 +17,12 @@ app.use(express.static('dist'));
 
 app.use(cors());
 app.use(helmet());
-app.use(csp({
-    directives: {
-        defaultSrc: [`'self'`],
-        imgSrc: [`'self'`]
-    }
-}));
+// app.use(csp({
+//     directives: {
+//         defaultSrc: [`'self'`],
+//         imgSrc: [`'self'`]
+//     }
+// }));
 app.use(compression());
 app.use(methodOverride());
 app.use(bodyParser.json());
