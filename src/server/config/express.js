@@ -5,7 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 const methodOverride = require('method-override');
-const csp = require('express-csp-header');
+const csp = require(`helmet-csp`);
 
 const constant = require('./directory');
 
@@ -17,17 +17,13 @@ app.use(express.static(constant.distDir));
 app.use(express.static(constant.assetsDir));
 
 app.use(cors());
+app.use(helmet());
 app.use(csp({
-    policies: {
-        'default-src': [csp.SELF],
-        'script-src': [csp.SELF, csp.INLINE],
-        'style-src': [csp.SELF],
-        'img-src': [csp.SELF],
-        'worker-src': [csp.NONE],
-        'block-all-mixed-content': true
+    directives: {
+        defaultSrc: [`'self'`],
+        imgSrc: [`'self'`]
     }
 }));
-app.use(helmet());
 app.use(compression());
 app.use(methodOverride());
 app.use(bodyParser.json());
