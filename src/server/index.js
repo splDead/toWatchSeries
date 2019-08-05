@@ -7,3 +7,5 @@ app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().use
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
+
+module.exports = app;
