@@ -15,7 +15,13 @@ require('dotenv').config();
 app.use(express.static(constant.distDir));
 
 app.use(cors());
-app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'"],
+        scriptSrc: ["'unsafe-eval'"]
+    }
+}));
 app.use(compression());
 app.use(methodOverride());
 app.use(bodyParser.json());
