@@ -20,9 +20,9 @@ app.use(cors());
 app.use(csp({
     policies: {
         'default-src': [csp.SELF],
-        'script-src': [csp.SELF, csp.INLINE, 'somehost.com'],
-        'style-src': [csp.SELF, 'mystyles.net'],
-        'img-src': ['data:', 'images.com'],
+        'script-src': [csp.SELF, csp.INLINE],
+        'style-src': [csp.SELF],
+        'img-src': [csp.SELF],
         'worker-src': [csp.NONE],
         'block-all-mixed-content': true
     }
