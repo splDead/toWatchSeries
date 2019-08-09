@@ -1,5 +1,5 @@
-const http = require('http');
+const https = require('https');
 
 setInterval(function() {
-    http.get('https://to-watch-series.herokuapp.com');
+    https.get('https://to-watch-series.herokuapp.com');
 }, 300000); // every 5 minutes (300000)
