@@ -6,8 +6,8 @@ import './app.css';
 export default class App extends Component {
   state = {
     username: null,
-    email: null,
-    password: null,
+    email: '',
+    password: '',
     success: false
   };
 

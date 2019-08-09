@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const db = require('../db/users');
 
 let users = [
     {
@@ -31,17 +32,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/getUsername', (req, res) => {
-    if (!users[0].success) {
+    const user = db.getLoginUser();
+    if (!user) {
         res.send({ username: os.userInfo().username })
     } else {
-        res.send({ username: users[0].email, success: true });
+        res.send({ username: user.email, success: true });
     }
 });
 
 app.post('/api/auth/login', (req, res) => {
     const { email, password } = req.body;
 
-    const user = users.find(el => el.email === email);
+    let user = db.getUserByEmail(email);
+
+    console.log(user);
 
     if (user) {
         if (user.password === password) {
@@ -50,7 +54,7 @@ app.post('/api/auth/login', (req, res) => {
                 email
             }, process.env.TOKEN_SECRET_KEY);
 
-            users = users.map(el => el.id === user.id ? ({ ...el, token, success: true }) : el);
+            db.updateUser({ ...user, token });
 
             res.json({
                 success: true,
