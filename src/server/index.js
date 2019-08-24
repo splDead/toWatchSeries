@@ -19,7 +19,7 @@ let users = [
 
 const app = express();
 
-require('./utils/ping');
+// require('./utils/ping');
 
 require('dotenv').config();
 
